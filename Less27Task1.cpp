@@ -2,6 +2,7 @@
 #include <cassert>
 #include <string>
 #include <cmath>
+#include <vector>
 
 enum  Colors
 {
@@ -29,6 +30,19 @@ public:
         color = static_cast<Colors>(nNumColor);
     }
     // metod for searsch around reactangle
+    void getCircumReactangleFig(bool bIsCircle, std::vector<double> params) {
+        std::cout << "Area of a circumscribed rectangle: ";
+        if (bIsCircle) {
+            std::cout << params[0] * params[0] * 4;
+        }
+        else {
+            double dArea{1};
+            if (params.size() > 1) for (auto& i : params) dArea *= i;
+            else dArea = params[0] * params[0];
+            std::cout << dArea;
+        }
+        std::cout << std::endl;
+    }
 
 };
 class Circle : Figure {
@@ -41,6 +55,11 @@ public:
     }
     void getArea() {
         std::cout << "Area of a circle: " << atan(1) * 4 * dRadius << std::endl;
+    }
+    void getCircumReactangle() {
+        std::vector<double> param;
+        param.push_back(dRadius);
+        getCircumReactangleFig(true, param);
     }
 };
 
@@ -55,6 +74,11 @@ public:
     void getArea() {
         std::cout << "Area of a square: " << dEdge * dEdge << std::endl;
     }
+    void getCircumReactangle() {
+        std::vector<double> param;
+        param.push_back(dEdge);
+        getCircumReactangleFig(false, param);
+    }
 };
 
 class Triangle : Figure {
@@ -67,6 +91,11 @@ public:
     }
     void getArea() {
         std::cout << "Area of a triangle: " << dEdge * dEdge * sqrt(3)/4 << std::endl;
+    }
+    void getCircumReactangle() {
+        std::vector<double> param;
+        param.push_back(dEdge);
+        getCircumReactangleFig(false, param);
     }
 };
 
@@ -82,10 +111,70 @@ public:
     void getArea() {
         std::cout << "Area of a rectangle: " << dHeight * dWeight << std::endl;
     }
+    void getCircumReactangle() {
+        std::vector<double> param;
+        param.push_back(dHeight);
+        param.push_back(dWeight);
+        getCircumReactangleFig(false, param);
+    }
 };
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::string cCommand{""};
+    
+    while (cCommand != "quit") {
+
+        std::cout << "Input command (circle, square, triangle, rectangle or quit): ";
+        std::cin >> cCommand;
+
+        if (cCommand == "circle") {
+            Circle* figure = new Circle;
+
+            figure->setPar();
+            figure->getArea();
+            figure->getCircumReactangle();
+
+            delete figure;
+            figure = { nullptr };
+        }
+        else if (cCommand == "square") {
+            Square* figure = new Square;
+
+            figure->setPar();
+            figure->getArea();
+            figure->getCircumReactangle();
+
+            delete figure;
+            figure = { nullptr };
+        }
+        else if (cCommand == "triangle") {
+            Triangle* figure = new Triangle;
+
+            figure->setPar();
+            figure->getArea();
+            figure->getCircumReactangle();
+
+            delete figure;
+            figure = { nullptr };
+        }
+        else if (cCommand == "rectangle") {
+            Rectangle* figure = new Rectangle;
+
+            figure->setPar();
+            figure->getArea();
+            figure->getCircumReactangle();
+
+            delete figure;
+            figure = { nullptr };
+        }
+        else if (cCommand == "quit") {
+            break;
+        }
+        else {
+            std::cout << "Unknow commad, try again.\n";
+        }
+    }
+    return 0;
 }
 
