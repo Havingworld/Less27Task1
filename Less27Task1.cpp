@@ -45,7 +45,7 @@ public:
     }
 
 };
-class Circle : Figure {
+class Circle : public Figure {
     double dRadius{ 0.0f };
 public:
     void setPar() {
@@ -63,7 +63,7 @@ public:
     }
 };
 
-class Square : Figure {
+class Square : public Figure {
     double dEdge{ 0.0f };
 public:
     void setPar() {
@@ -81,7 +81,7 @@ public:
     }
 };
 
-class Triangle : Figure {
+class Triangle : public Figure {
     double dEdge{ 0.0f };
 public:
     void setPar() {
@@ -99,7 +99,7 @@ public:
     }
 };
 
-class Rectangle : Figure {
+class Rectangle : public Figure {
     double  dHeight{ 0.0f },
             dWeight{ 0.0f };
 public:
@@ -129,44 +129,32 @@ int main()
         std::cin >> cCommand;
 
         if (cCommand == "circle") {
-            Circle* figure = new Circle;
+            Circle figure;
 
-            figure->setPar();
-            figure->getArea();
-            figure->getCircumReactangle();
-
-            delete figure;
-            figure = { nullptr };
+            figure.setPar();
+            figure.getArea();
+            figure.getCircumReactangle();
         }
         else if (cCommand == "square") {
-            Square* figure = new Square;
-
-            figure->setPar();
-            figure->getArea();
-            figure->getCircumReactangle();
-
-            delete figure;
-            figure = { nullptr };
+            Square figure;
+            
+            figure.setPar();
+            figure.getArea();
+            figure.getCircumReactangle();
         }
         else if (cCommand == "triangle") {
-            Triangle* figure = new Triangle;
+            Triangle figure;
 
-            figure->setPar();
-            figure->getArea();
-            figure->getCircumReactangle();
-
-            delete figure;
-            figure = { nullptr };
+            figure.setPar();
+            figure.getArea();
+            figure.getCircumReactangle();
         }
         else if (cCommand == "rectangle") {
-            Rectangle* figure = new Rectangle;
+            Rectangle figure;
 
-            figure->setPar();
-            figure->getArea();
-            figure->getCircumReactangle();
-
-            delete figure;
-            figure = { nullptr };
+            figure.setPar();
+            figure.getArea();
+            figure.getCircumReactangle();
         }
         else if (cCommand == "quit") {
             break;
